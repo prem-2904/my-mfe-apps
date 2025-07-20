@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { loadRemoteModule } from '@angular-architects/module-federation';
+//import { loadRemoteModule } from '@angular-architects/module-federation';
 
 export const routes: Routes = [
     // {
@@ -16,6 +16,19 @@ export const routes: Routes = [
     //         exposedModule: './SalesRoutes'     // matches 'exposes' key in remote
     //     }).then(m => m.SalesRoutes)
     // },
+    {
+        path: '',
+        redirectTo: 'login',
+        pathMatch: 'full'
+    },
+    {
+        path: 'home',
+        loadComponent: () => import('./components/home/home.component').then(m => m.HomeComponent)
+    },
+    {
+        path: 'login',
+        loadComponent: () => import('./components/login/login.component').then(m => m.LoginComponent)
+    },
     {
         path: 'sales',
         loadChildren: () => import('salesApp/SalesRoutes').then(m => m.SalesRoutes)

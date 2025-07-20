@@ -1,19 +1,22 @@
 import { Routes } from '@angular/router';
+import { LayoutComponent } from './components/layout/layout.component';
 
 export const routes: Routes = [
     {
         path: '',
-        redirectTo: 'profile',
-        pathMatch: 'full'
+        component: LayoutComponent,
+        children: [
+            {
+                path: '',
+                redirectTo: 'profile',
+                pathMatch: 'full'
+            },
+            {
+                path: 'profile',
+                loadComponent: () => import('./components/profile/profile.component').then(m => m.ProfileComponent)
+            }
+        ]
     },
-    {
-        path: 'profile',
-        loadComponent: () => import('./components/profile/profile.component').then(m => m.ProfileComponent)
-    },
-    {
-        path: 'layout',
-        loadComponent: () => import('./components/layout/layout.component').then(m => m.LayoutComponent)
-    }
 ];
 
 export const AccountRoutes: Routes = routes;
